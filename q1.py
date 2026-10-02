@@ -1,6 +1,5 @@
 from typing import List
 
-
 def printer_queue_order(pages: List[int]) -> List[int]:
     """
     Problem 1: Round-robin printer.
@@ -16,7 +15,18 @@ def printer_queue_order(pages: List[int]) -> List[int]:
     Returns:
         List of document numbers in the order they finish printing.
     """
-    pass
+    ans = []
+
+    while len(ans) < len(pages):
+        for i in range(len(pages.copy())):
+            if pages[i] == 0:
+                continue
+            else:
+                if pages[i] == 1:
+                    ans.append(i)
+
+                pages[i] -= 1
+    return ans
 
 
 if __name__ == "__main__":
