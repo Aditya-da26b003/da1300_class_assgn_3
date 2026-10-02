@@ -8,6 +8,20 @@ class TreeNode:
         self.left = left
         self.right = right
 
+def avg(root):
+    if root.left == None and root.right == None:
+        return [root.salary, 1]
+    elif root.left == None:
+        a = avg(root.right)
+        return [a[0] + root.salary, a[1] + 1]
+    elif root.right == None:
+        a = avg(root.left)
+        return [a[0] + root.salary, a[1] + 1]
+    else:
+        l = avg(root.left)
+        r = avg(root.right)
+
+        return [root.salary + l[0] + r[0], l[1] + r[1] + 1]
 
 def count_fair_managers(root: Optional[TreeNode]) -> int:
     """
@@ -23,7 +37,13 @@ def count_fair_managers(root: Optional[TreeNode]) -> int:
     Returns:
         Number of fair managers in the tree.
     """
-    pass
+    if root == None:
+        return 0
+
+    a = avg(root)
+    if root.salary == a[0]//a[1]:
+        return 1 + count_fair_managers(root.right) + count_fair_managers(root.left)
+    return count_fair_managers(root.right) + count_fair_managers(root.left)
 
 
 if __name__ == "__main__":
