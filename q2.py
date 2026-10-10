@@ -32,6 +32,8 @@ def surviving_ships(ships: List[int]) -> List[int]:
                     stack.append(i)
                 else:
                     stack.pop()
+            else:
+                stack.append(i)
         if stack == prevStack:
             break
 
